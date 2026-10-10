@@ -29,6 +29,11 @@ import androidx.compose.material3.Button
 import androidx.compose.runtime.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +55,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+    var contacted by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -58,10 +65,21 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.profile),
+            contentDescription = "Profile picture",
+            modifier = Modifier
+                .size(100.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White, RoundedCornerShape(20.dp))
+                .background(Color.White, shape = RoundedCornerShape(16.dp))
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -88,29 +106,24 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 color = Color.DarkGray
             )
 
-            var contacted by remember { mutableStateOf(false) }
-
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
-                onClick = { contacted = !contacted }
-            ) {
+            Button(onClick = { contacted = !contacted }) {
                 Text(
                     text = if (contacted) "Nice to meet you!" else "Contact me"
                 )
-                if (contacted) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Thanks for visiting my card!",
-                        color = Color.DarkGray
-                    )
-                }
             }
 
+            if (contacted) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Thanks for visiting my card!",
+                    color = Color.DarkGray
+                )
+            }
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
