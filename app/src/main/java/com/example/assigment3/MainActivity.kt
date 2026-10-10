@@ -25,6 +25,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material3.Button
+import androidx.compose.runtime.*
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +87,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 fontSize = 16.sp,
                 color = Color.DarkGray
             )
+
+            var contacted by remember { mutableStateOf(false) }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = { contacted = !contacted }
+            ) {
+                Text(
+                    text = if (contacted) "Nice to meet you!" else "Contact me"
+                )
+            }
+
         }
     }
 }
