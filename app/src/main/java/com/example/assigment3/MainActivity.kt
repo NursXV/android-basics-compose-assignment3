@@ -98,6 +98,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 Text(
                     text = if (contacted) "Nice to meet you!" else "Contact me"
                 )
+                if (contacted) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Thanks for visiting my card!",
+                        color = Color.DarkGray
+                    )
+                }
             }
 
         }
