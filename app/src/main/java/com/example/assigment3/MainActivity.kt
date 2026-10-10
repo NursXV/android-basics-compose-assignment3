@@ -20,6 +20,11 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,31 +43,50 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(Color(0xFFF2F5FF))
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = "My Business Card",
-            fontSize = 28.sp
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White, RoundedCornerShape(20.dp))
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "My Business Card",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF243B64)
+            )
 
-        Text(
-            text = name,
-            fontSize = 22.sp
-        )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = "Android Developer",
-            fontSize = 16.sp
-        )
+            Text(
+                text = name,
+                fontSize = 22.sp,
+                color = Color(0xFF345995)
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "Android Developer",
+                fontSize = 16.sp,
+                color = Color.DarkGray
+            )
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
